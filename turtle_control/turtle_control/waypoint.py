@@ -37,7 +37,7 @@ class WaypointNode(Node):
         # Create clients
         self.reset = self.create_client(Empty, "reset", callback_group=self.cb_group)
         self.tele_abs = self.create_client(TeleportAbsolute, "turtle1/teleport_absolute", callback_group=self.cb_group)
-        self.set_pen = self.create_client(TeleportAbsolute, "turtle1/teleport_absolute", callback_group=self.cb_group)
+        self.set_pen = self.create_client(SetPen, "turtle1/set_pen", callback_group=self.cb_group)
 
         # Create a timer with a callback
         # self.frequency = 90
@@ -85,6 +85,7 @@ class WaypointNode(Node):
         await self.set_pen.call_async(SetPen.Request(r=255,g=255,b=255,width=2,off=1))    
     
     async def load_callback(self, request, response):
+        await self.set_pen.call_async(SetPen.Request(r=255,g=255,b=255,width=2, off=0))
         await self.reset.call_async(Empty.Request())
 
         # Straight from homework solution code
