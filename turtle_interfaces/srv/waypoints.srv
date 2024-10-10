@@ -1,3 +1,0 @@
-geometry_msgs/Point[] waypoints #Arbitrary number of waypoints
----
-float64 distance #Total straight line distance turtle must move to complete one waypoint cycle
