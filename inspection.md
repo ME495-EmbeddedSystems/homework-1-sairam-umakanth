@@ -109,7 +109,7 @@ If the nodes launched from the `launchfile` are not running, you will get incorr
 
     ```
 
-12. Use the ROS command `${command and args}` to retrieve a template/prototype for entering parameters for the `/switch` service on the command line.
+12. Use the ROS command `ros2 interface show crazy_turtle_interfaces/srv/Switch` to retrieve a template/prototype for entering parameters for the `/switch` service on the command line.
     ```
     turtlesim/Pose mixer # use a strange formula to set the new location of the turtle
 	      float32 x
