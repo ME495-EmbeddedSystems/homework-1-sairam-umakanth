@@ -39,8 +39,6 @@ If the nodes launched from the `launchfile` are not running, you will get incorr
    /turtle1/cmd_vel
    /turtle1/color_sensor
    /turtle1/pose
-
-
    ```
 
 7. Use the ROS command `ros2 topic hz /turtle1/cmd_vel` to verify that the frequency of
@@ -49,30 +47,28 @@ If the nodes launched from the `launchfile` are not running, you will get incorr
 8. Use the ROS command `ros2 service list` to list the services.
    The output of the command looks like
    ```
-  /clear
-  /kill
-  /mover/describe_parameters
-  /mover/get_parameter_types
-  /mover/get_parameters
-  /mover/get_type_description
-  /mover/list_parameters
-  /mover/set_parameters
-  /mover/set_parameters_atomically
-  /reset
-  /roving_turtle/describe_parameters
-  /roving_turtle/get_parameter_types
-  /roving_turtle/get_parameters
-  /roving_turtle/get_type_description
-  /roving_turtle/list_parameters
-  /roving_turtle/set_parameters
-  /roving_turtle/set_parameters_atomically
-  /spawn
-  /switch
-  /turtle1/set_pen
-  /turtle1/teleport_absolute
-  /turtle1/teleport_relative
-
-
+   /clear
+   /kill
+   /mover/describe_parameters
+   /mover/get_parameter_types
+   /mover/get_parameters
+   /mover/get_type_description
+   /mover/list_parameters
+   /mover/set_parameters
+   /mover/set_parameters_atomically
+   /reset
+   /roving_turtle/describe_parameters
+   /roving_turtle/get_parameter_types
+   /roving_turtle/get_parameters
+   /roving_turtle/get_type_description
+   /roving_turtle/list_parameters
+   /roving_turtle/set_parameters
+   /roving_turtle/set_parameters_atomically
+   /spawn
+   /switch
+   /turtle1/set_pen
+   /turtle1/teleport_absolute
+   /turtle1/teleport_relative
    ```
 
 9. Use the ROS command `ros2 service type /switch` to determine the type of the `/switch` service, which is `crazy_turtle_interfaces/srv/Switch`.
@@ -94,8 +90,6 @@ If the nodes launched from the `launchfile` are not running, you will get incorr
       qos_overrides./parameter_events.publisher.reliability
       start_type_description_service
       use_sim_time
-
-
     ```
 
 11. Use the ROS command `ros2 param describe /mover velocity` to get information about the `/mover` `velocity` parameter, including its type, description, and constraints
@@ -104,7 +98,6 @@ If the nodes launched from the `launchfile` are not running, you will get incorr
       Type: double
       Description: The velocity of the turtle
       Constraints:
-
     ```
 
 12. Use the ROS command `ros2 interface show crazy_turtle_interfaces/srv/Switch` to retrieve a template/prototype for entering parameters for the `/switch` service on the command line.
@@ -118,7 +111,6 @@ If the nodes launched from the `launchfile` are not running, you will get incorr
     ---
     float64 x # the new x position of the new turtle
     float64 y # the new y position of the new
-
     ```
 
 ## Package Exploration
@@ -126,7 +118,6 @@ If the nodes launched from the `launchfile` are not running, you will get incorr
    The output of the command looks like
    ```
    crazy_turtle_interfaces/srv/Switch
-
    ```
 2. Use the ROS command `ros2 pkg executables crazy_turtle` to list the executables included with the `crazy_turtle` package
    The output of the command looks like
@@ -146,7 +137,6 @@ If the nodes launched from the `launchfile` are not running, you will get incorr
 
     response:
     crazy_turtle_interfaces.srv.Switch_Response(x=5.0, y=4.0)
-
 
     ```
 3. The `switch` service performs the following actions (in sequence):
