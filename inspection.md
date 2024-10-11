@@ -30,8 +30,6 @@ If the nodes launched from the `launchfile` are not running, you will get incorr
    ```
   /mover
   /roving_turtle
-
-
    ```
 6. Use the ROS command `ros2 topic list` to list the topics
    The output of the command looks like
