@@ -12,8 +12,10 @@ setup(
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
+        ######################### Begin_Citation [5] ##############################
         (os.path.join('share', package_name, 'launch'), glob('launch/*launch.xml')),
         (os.path.join('share', package_name, 'config'), glob('config/*yaml'))
+        ######################## End_Citation [5] #################################
     ],
     install_requires=['setuptools'],
     zip_safe=True,

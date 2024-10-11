@@ -156,6 +156,6 @@ If the nodes launched from the `launchfile` are not running, you will get incorr
     2. It then respawns a new turtle at `(x=5.0, y=4.0)`
 4. What happens to the turtle's motion if you use `ros2 param set /mover velocity 10.0` to change `/mover velocity` to 10? `same`
 5. Use the Linux command `pkill mover` to kill the `/mover` node.
-6. Use the ROS command `ros2 run crazy_turtle mover --ros-args --remap cmd_vel:=/turtle1/cmd_vel --param velocity:=10.0` to start the `/mover` node with a velocity of 10. 
-    - Be sure to remap `cmd_vel` to `/turtle1/cmd_vel`.
+6. Use the ROS command `ros2 run crazy_turtle mover --ros-args --remap cmd_vel:=/turtle1/cmd_vel --param velocity:=10.0` to start the `/mover` node with a velocity of 1
+    - Be sure to remap `cmd_vel` to `/turtle1/cmd_vel`. [4]
 7. What happened to the turtle's velocity after relaunching `mover`? `faster`

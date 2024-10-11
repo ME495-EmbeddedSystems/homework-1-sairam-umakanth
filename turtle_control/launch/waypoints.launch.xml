@@ -1,6 +1,8 @@
 <launch>
     <node pkg="turtlesim" exec="turtlesim_node" name="turtlesim_node">
+        <!--################ Begin_Citation [5] ###################-->
         <param from="$(find-pkg-share turtle_control)/config/colors.yaml"/>
+        <!--################ End_Citation [5] ######################-->
     </node>
     <node pkg="turtle_control" exec="waypoint" name="waypoint">
         <param name="tolerance" value="0.05"/>
