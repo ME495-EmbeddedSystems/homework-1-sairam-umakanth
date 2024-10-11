@@ -1,5 +1,6 @@
 
 import rclpy
+import math
 from rclpy.node import Node
 from rclpy.parameter import Parameter
 from std_srvs.srv import Empty
@@ -8,6 +9,7 @@ from turtlesim.srv import TeleportAbsolute, Spawn, Kill, SetPen
 import numpy as np
 from rclpy.callback_groups import ReentrantCallbackGroup
 from turtle_interfaces.srv import Waypoints
+from turtle_interfaces.msg import ErrorMetric
 from turtlesim.msg import Pose
 from geometry_msgs.msg import Twist
 
@@ -32,6 +34,8 @@ class WaypointNode(Node):
         self.goal_wp = 0.0
         self.no_wp = 0.0
         self.curr_wp = 0.0
+        self.actual_dist = 0.0
+        self.metric = ErrorMetric()
 
         # Declaring readable params
         self.declare_parameter('frequency', 90.0)
@@ -51,14 +55,21 @@ class WaypointNode(Node):
         # Create subscriber
         self.subscription = self.create_subscription(Pose, "turtle1/pose", self.subscriber_callback,10)
         self.pose = Pose
+        self.prev_pose = None
 
         # Create publisher
         self.pub_vel = self.create_publisher(Twist, "turtle1/cmd_vel", 10)
+        self.pub_metric = self.create_publisher(ErrorMetric, "loop_metrics", 10)
 
         # Create a timer with a callback
         # self.frequency = 90
         timer_period = 1.0 / self.frequency  # Timer period in seconds
         self.timer = self.create_timer(timer_period, self.timer_callback)
+
+    def reset_metric(self):
+        self.metric.complete_loops = 0
+        self.metric.real_dist = 0.0
+        self.metric.error = 0.0
 
     def timer_callback(self):
         #self.get_logger().info('Test')
@@ -92,7 +103,9 @@ class WaypointNode(Node):
     def get_remaining_distance(self, pose, wp):
         x = pose.x
         y = pose.y
-        return np.linalg.norm([x,y] - self.waypoints[wp])
+        dist = np.linalg.norm([x,y] - self.waypoints[wp])
+        self.actual_dist += dist
+        return dist
     
 
     def get_next_wp(self):
@@ -101,6 +114,10 @@ class WaypointNode(Node):
             self.goal_wp = 0
         else:
             self.goal_wp += 1
+        if self.curr_wp == 0 and self.metric.real_dist != 0.0:
+            self.metric.complete_loops += 1
+            self.metric.error = abs(self.metric.real_dist - self.actual_dist)
+            self.pub_metric.publish(self.metric)
 
     def get_theta(self):
         next_wpoint=self.waypoints[self.goal_wp]  
@@ -163,6 +180,8 @@ class WaypointNode(Node):
         # Set turtle to first waypoint location
         await self.tele_abs.call_async(TeleportAbsolute.Request(x = request.waypoints[0].x, y = request.waypoints[0].y))
         await self.set_pen.call_async(SetPen.Request(r=255,g=255,b=255,width=2,off=0))
+        self.reset_metric()
+        self.actual_dist = 0.0
         self.state = State.STOPPED
 
         self.curr_wp = 0
@@ -172,6 +191,14 @@ class WaypointNode(Node):
 
     def subscriber_callback(self, msg):
         self.pose = msg
+        if self.prev_pose is not None:
+            prevX = self.prev_pose.x
+            prevY = self.prev_pose.y
+            currX = self.pose.x
+            currY = self.pose.y
+            self.metric.real_dist += math.sqrt((prevX - currX)**2 + (prevY - currY)**2)
+
+        self.prev_pose = self.pose
 
     def reset_vel(self):
         self.vel.linear.x = 0.0
