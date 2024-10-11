@@ -1,0 +1,6 @@
+Worked with Tony Shilati, Jueuen Kwon, Kyle Puckett, Caroline Terryn
+[1] ChatGPT, accessed on 10/6/2024. Transcript is in https://chatgpt.com/share/67096ca0-e3f4-8006-a583-ff443ed770d5
+[2] https://github.com/ME495-EmbeddedSystems/homework1-aawizard/ accessed on 10/8/2024
+[3] https://wiki.ros.org/turtlesim accessed on 10/7/2024
+[4] Tony Shilati
+[5] Kyle Puckett
