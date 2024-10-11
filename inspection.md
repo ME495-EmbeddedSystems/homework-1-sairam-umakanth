@@ -27,10 +27,10 @@ If the nodes launched from the `launchfile` are not running, you will get incorr
 
 5. Use the ROS command `ros2 node list` to list all the nodes that are running.
    The output of the command looks like
-   ```
+   `
   /mover
   /roving_turtle
-   ```
+   `
 6. Use the ROS command `ros2 topic list` to list the topics
    The output of the command looks like
    ```
