@@ -3,7 +3,7 @@
 <package format="3">
   <name>turtle_control</name>
   <version>0.0.0</version>
-  <description>TODO: Package description</description>
+  <description>Package that can load waypoints into turtlesim node and drives turtle</description>
   <maintainer email="sairam@u.northwestern.edu">sairamu02</maintainer>
   <license>Apache-2.0</license>
 
