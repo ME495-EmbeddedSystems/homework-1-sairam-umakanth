@@ -3,7 +3,7 @@
 <package format="3">
   <name>turtle_interfaces</name>
   <version>0.0.0</version>
-  <description>TODO: Package description</description>
+  <description>Package that links all interfaces used in turtle_control</description>
   <maintainer email="sairam@u.northwestern.edu">sairamu02</maintainer>
   <license>Apache-2.0</license>
 
