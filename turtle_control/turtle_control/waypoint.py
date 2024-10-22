@@ -136,7 +136,7 @@ class WaypointNode(Node):
                 '''
                 If remaining distance is above tolerance, turtle needs to still be driven to goal waypoint
                 '''
-                ##################### Begin_Citation [2] #############################
+                ##################### Begin_Citation [2, turtle_control/waypoint.py, 325-338] #############################
                 if abs(self.pose.theta - self.goal_theta) > 0.01: 
                     '''
                     If goal angle and turtle's orientation are not equal, drive turtle rotation in either direction to match the goal angle
@@ -176,7 +176,7 @@ class WaypointNode(Node):
         '''
         x = pose.x
         y = pose.y
-        ################### Begin_Citation [2] ################################
+        ################### Begin_Citation [2, turtle_control/waypoint.py, 229] ################################
         dist = np.linalg.norm([x,y] - self.waypoints[wp])
         #################### End_Citation [2] #################################
         self.actual_dist += dist
@@ -203,7 +203,7 @@ class WaypointNode(Node):
         RETURNS:
         goal angle
         '''
-        ############################ Begin_Citation [2] ###############################
+        ############################ Begin_Citation [2, turtle_control/waypoint.py, 182-184] ###############################
         next_wpoint=self.waypoints[self.goal_wp]  
         curr_wpoint=[self.pose.x,self.pose.y]
         return np.arctan2([next_wpoint[1]-curr_wpoint[1]], [next_wpoint[0]-curr_wpoint[0]])
@@ -235,7 +235,7 @@ class WaypointNode(Node):
 
         return response
     
-    ######################### Begin_Citation [2] ####################################
+    ######################### Begin_Citation [2, turtle_control/waypoint.py, 126-156] ####################################
     async def draw_x(self, x, y):
         '''
         Function to draw X at a waypoint
@@ -284,7 +284,7 @@ class WaypointNode(Node):
         self.pub_vel.publish(self.vel)
         await self.reset.call_async(Empty.Request())
 
-        ########################### Begin_Citation [2] ################################
+        ########################### Begin_Citation [2, turtle_control/waypoint.py, 249-251] ################################
         for point in request.waypoints:
             self.waypoints.append(np.array((point.x, point.y)))
             await self.draw_x(point.x,point.y) 
