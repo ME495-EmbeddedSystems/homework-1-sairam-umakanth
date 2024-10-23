@@ -62,7 +62,7 @@ class WaypointNode(Node):
         super().__init__('waypoint')
         self.state = State.STOPPED
         
-        self.cb_group = ReentrantCallbackGroup()
+        self.cb_group = ReentrantCallbackGroup() #  should generally prefer a MutuallyExclusive Callback Group: I don't see any callbacks here that you would want to be re-entered
         self.vel = Twist()              # velocity of turtle [3]
         self.waypoints = []             # array of waypoints 
         self.goal_theta = 0.0           # angle goal turtle needs to reach (differential drive)

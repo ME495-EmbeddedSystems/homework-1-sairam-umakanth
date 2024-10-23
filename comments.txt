@@ -1,0 +1,6 @@
+inspection.md: A-
+setup.py description does match package.xml
+
+Part II: A.
+
+
